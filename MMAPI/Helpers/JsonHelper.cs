@@ -1,11 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json.Serialization;
 using System.Net.Http.Formatting;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMAPI.Helpers
 {
