@@ -12,16 +12,22 @@ namespace MMAPI.Http
     public static class CreateFighterHttpTrigger
     {
         [FunctionName("CreateFighterHttpTrigger")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "fighter")]HttpRequestMessage req, TraceWriter log)
+        public static async Task<HttpResponseMessage> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "fighter")]HttpRequestMessage req,
+            [Queue(" ", Connection = " ")]IAsyncCollector<Fighter> outputQueueItem,
+            TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
 
-            // Get request body
             var newFighter = await req.Content.ReadAsAsync<Fighter>();
 
-            return newFighter == null
-                ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid fighter")
-                : req.CreateResponse(HttpStatusCode.OK, "Hello " + newFighter.FirstName + " " + newFighter.LastName);
+            if (newFighter != null)
+            {
+                await outputQueueItem.AddAsync(newFighter);
+                return req.CreateResponse(HttpStatusCode.Accepted, newFighter);
+            }
+
+            return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid fighter");
         }
     }
 }
