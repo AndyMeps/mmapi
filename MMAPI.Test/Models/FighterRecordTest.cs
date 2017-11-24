@@ -68,7 +68,7 @@ namespace MMAPI.Test.Models
         {
             var fr = new FighterRecord
             {
-                NoContest = 1
+                NoContests = 1
             };
 
             var result = fr.ToString();
@@ -100,7 +100,7 @@ namespace MMAPI.Test.Models
                 Wins = 24,
                 Losses = 20,
                 Draws = 5,
-                NoContest = 100,
+                NoContests = 100,
             };
 
             var result = fr.ToString();
@@ -117,7 +117,7 @@ namespace MMAPI.Test.Models
                 Wins = int.MaxValue,
                 Losses = int.MaxValue,
                 Draws = int.MaxValue,
-                NoContest = int.MaxValue
+                NoContests = int.MaxValue
             };
 
             var result = fr.ToString();
@@ -136,6 +136,7 @@ namespace MMAPI.Test.Models
             var fr2 = new FighterRecord();
 
             Assert.IsTrue(fr1.Equals(fr2));
+            Assert.IsTrue(fr1 == fr2);
         }
 
         [TestMethod]
@@ -146,6 +147,7 @@ namespace MMAPI.Test.Models
             var fr2 = new FighterRecord();
 
             Assert.IsFalse(fr1.Equals(fr2));
+            Assert.IsFalse(fr1 == fr2);
         }
 
         [TestMethod]
@@ -156,6 +158,7 @@ namespace MMAPI.Test.Models
             var fr2 = new FighterRecord();
 
             Assert.IsFalse(fr1.Equals(fr2));
+            Assert.IsFalse(fr1 == fr2);
         }
 
         [TestMethod]
@@ -166,6 +169,7 @@ namespace MMAPI.Test.Models
             var fr2 = new FighterRecord();
 
             Assert.IsFalse(fr1.Equals(fr2));
+            Assert.IsFalse(fr1 == fr2);
         }
 
         [TestMethod]
@@ -176,6 +180,7 @@ namespace MMAPI.Test.Models
             var fr2 = new FighterRecord();
 
             Assert.IsFalse(fr1.Equals(fr2));
+            Assert.IsFalse(fr1 == fr2);
         }
 
         [TestMethod]
@@ -186,6 +191,18 @@ namespace MMAPI.Test.Models
             object o = new object();
 
             Assert.IsFalse(fr1.Equals(o));
+            Assert.IsFalse(fr1 == o as FighterRecord);
+        }
+
+        [TestMethod]
+        [TestCategory("FighterRecord_Equal")]
+        public void Equal_Default_Null_ShouldBeFalse()
+        {
+            var fr1 = new FighterRecord();
+            FighterRecord fr2 = null;
+
+            Assert.IsFalse(fr1.Equals(fr2));
+            Assert.IsFalse(fr1 == fr2);
         }
         #endregion
     }
