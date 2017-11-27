@@ -7,7 +7,7 @@ namespace MMAPI.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Int16 UpperWeightLimit { get; set; }
+        public ushort UpperWeightLimit { get; set; }
 
         #region Object Overrides
         public int CompareTo(object obj)
@@ -38,7 +38,11 @@ namespace MMAPI.Models
         #region Operator Overrides
         public static bool operator ==(WeightClass weightClass1, WeightClass weightClass2)
         {
-            return weightClass1.UpperWeightLimit == weightClass2.UpperWeightLimit;
+            if(!ReferenceEquals(weightClass1, null) && !ReferenceEquals(weightClass2, null))
+            {
+                return weightClass1.UpperWeightLimit == weightClass2.UpperWeightLimit;
+            }
+            return false;
         }
         public static bool operator !=(WeightClass weightClass1, WeightClass weightClass2)
         {

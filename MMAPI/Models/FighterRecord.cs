@@ -2,10 +2,10 @@
 {
     public class FighterRecord
     {
-        public int Wins { get; set; }
-        public int Losses { get; set; }
-        public int Draws { get; set; }
-        public int NoContests { get; set; }
+        public uint Wins { get; set; }
+        public uint Losses { get; set; }
+        public uint Draws { get; set; }
+        public uint NoContests { get; set; }
 
         #region Object Overrides
         public override bool Equals(object obj)

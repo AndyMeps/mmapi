@@ -37,6 +37,7 @@ namespace MMAPI.Http
                     Gender = Gender.Male,
                     DateOfBirth = new DateTimeOffset(new DateTime(1988, 7, 14, 0, 0, 0, DateTimeKind.Utc)),
                     Height = 69,
+                    Reach = 25,
                     WeightClasses = new List<WeightSummary>
                     {
                         new WeightSummary { Id = Guid.NewGuid(), Name = "Featherweight" },
