@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MMAPI.Models;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MMAPI.Test.Models
+namespace MMAPI.Models.Test.Models
 {
     [TestClass]
     public class FighterRecordTest

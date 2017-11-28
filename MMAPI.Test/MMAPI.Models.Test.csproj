@@ -7,8 +7,8 @@
     <ProjectGuid>{056455AA-7ADF-40B9-913A-96B83531EF50}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MMAPI.Test</RootNamespace>
-    <AssemblyName>MMAPI.Test</AssemblyName>
+    <RootNamespace>MMAPI.Models.Test</RootNamespace>
+    <AssemblyName>MMAPI.Models.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -56,13 +56,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MMAPI\MMAPI.csproj">
-      <Project>{38069d17-5ea4-4e5b-a4f8-a2dad980d013}</Project>
-      <Name>MMAPI</Name>
-    </ProjectReference>
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitignore" />
+    <ProjectReference Include="..\MMAPI.Models\MMAPI.Models.csproj">
+      <Project>{37c51b1c-0bae-4131-b636-54543a145c6c}</Project>
+      <Name>MMAPI.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
