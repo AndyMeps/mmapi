@@ -14,7 +14,7 @@ namespace MMAPI.Models
         /// <summary>
         /// Unique identifier for the fighter.
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         /// <summary>
         /// First name of the fighter.

@@ -6,6 +6,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using MMAPI.Models;
+using Newtonsoft.Json;
 
 namespace MMAPI.Http
 {
@@ -13,22 +14,14 @@ namespace MMAPI.Http
     public static class CreateFighterHttpTrigger
     {
         [FunctionName("CreateFighterHttpTrigger")]
-        public static async Task<HttpResponseMessage> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "fighter")]HttpRequestMessage req,
-            [Queue("outputQueue")]IAsyncCollector<Fighter> outputQueueMessage,
+        [return: Queue("create-fighter")]
+        public static Fighter Run(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "fighter")]Fighter fighter,
             TraceWriter log)
         {
-            log.Info("C# HTTP trigger function processed a request.");
+            log.Info($"Received a new fighter: {JsonConvert.SerializeObject(fighter)}");
 
-            var newFighter = await req.Content.ReadAsAsync<Fighter>();
-
-            if (newFighter != null)
-            {
-                await outputQueueMessage.AddAsync(newFighter);
-                return req.CreateResponse(HttpStatusCode.Accepted, newFighter);
-            }
-
-            return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a valid fighter");
+            return fighter;
         }
     }
 }
