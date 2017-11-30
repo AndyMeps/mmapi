@@ -558,6 +558,15 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "MMAPI.Services/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/MMAPI.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MMAPI.Services.dll": {}
+        }
       }
     }
   },
@@ -2741,10 +2750,16 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "MMAPI.Services/1.0.0": {
+      "type": "project",
+      "path": "../MMAPI.Services/MMAPI.Services.csproj",
+      "msbuildProject": "../MMAPI.Services/MMAPI.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "MMAPI.Services >= 1.0.0",
       "NETStandard.Library >= 2.0.0",
       "Newtonsoft.Json >= 9.0.1"
     ]
@@ -2783,7 +2798,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\andy.mepham\\source\\repos\\MMAPI\\MMAPI.Services\\MMAPI.Services.csproj": {
+              "projectPath": "C:\\Users\\andy.mepham\\source\\repos\\MMAPI\\MMAPI.Services\\MMAPI.Services.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

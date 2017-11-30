@@ -9,6 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "MMAPI.Models/1.0.0": {
         "dependencies": {
+          "MMAPI.Services": "1.0.0",
           "NETStandard.Library": "2.0.0",
           "Newtonsoft.Json": "9.0.1"
         },
@@ -410,6 +411,11 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "MMAPI.Services/1.0.0": {
+        "runtime": {
+          "MMAPI.Services.dll": {}
+        }
       }
     }
   },
@@ -677,6 +683,11 @@
       "sha512": "sha512-Mk2mKmPi0nWaoiYeotq1dgeNK1fqWh61+EK+w4Wu8SWuTYLzpUnschb59bJtGywaPq7SmTuPf44wrXRwbIrukg==",
       "path": "system.xml.xdocument/4.0.11",
       "hashPath": "system.xml.xdocument.4.0.11.nupkg.sha512"
+    },
+    "MMAPI.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

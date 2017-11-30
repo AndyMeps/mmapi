@@ -3,13 +3,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using MMAPI.Services.Interfaces;
 
 namespace MMAPI.Models
 {
     /// <summary>
     /// A fighter entry including general statistics relating to the fighter.
     /// </summary>
-    public class Fighter
+    public class Fighter : IDocumentEntity
     {
         /// <summary>
         /// Unique identifier for the fighter.
