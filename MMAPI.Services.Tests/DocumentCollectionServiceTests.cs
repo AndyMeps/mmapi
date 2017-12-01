@@ -27,6 +27,7 @@ namespace MMAPI.Services.Tests
     public class DocumentCollectionServiceTests
     {
         [TestMethod]
+        [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_DefaultForNameTestClass_ShouldMatch()
         {
             var service = new DocumentCollectionService<NameTestClass>("uri", "authKey", "dbName");
@@ -35,6 +36,7 @@ namespace MMAPI.Services.Tests
         }
 
         [TestMethod]
+        [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_DefaultForSimpleObject_ShouldMatch()
         {
             var service = new DocumentCollectionService<SimpleObject>("uri", "authKey", "dbName");
@@ -43,6 +45,7 @@ namespace MMAPI.Services.Tests
         }
 
         [TestMethod]
+        [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_CollectionNameAttribute_ShouldMatch()
         {
             var service = new DocumentCollectionService<SimpleAttributeObject>("uri", "authKey", "dbName");

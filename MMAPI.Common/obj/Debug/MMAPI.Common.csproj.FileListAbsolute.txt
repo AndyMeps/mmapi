@@ -1,6 +1,0 @@
-C:\Users\andy.mepham\source\repos\MMAPI\MMAPI.Common\bin\Debug\MMAPI.Common.dll
-C:\Users\andy.mepham\source\repos\MMAPI\MMAPI.Common\bin\Debug\MMAPI.Common.pdb
-C:\Users\andy.mepham\source\repos\MMAPI\MMAPI.Common\obj\Debug\MMAPI.Common.csprojResolveAssemblyReference.cache
-C:\Users\andy.mepham\source\repos\MMAPI\MMAPI.Common\obj\Debug\MMAPI.Common.csproj.CoreCompileInputs.cache
-C:\Users\andy.mepham\source\repos\MMAPI\MMAPI.Common\obj\Debug\MMAPI.Common.dll
-C:\Users\andy.mepham\source\repos\MMAPI\MMAPI.Common\obj\Debug\MMAPI.Common.pdb
