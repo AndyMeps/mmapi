@@ -1,12 +1,13 @@
 ﻿using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using MMAPI.Services.Factories;
 using MMAPI.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 
 namespace MMAPI.Services
 {
-    public class DocumentCollectionService<T> : IDocumentCollectionService<T> where T : IDocumentEntity
+    public class DocumentCollectionService<TDocumentEntity> : IDocumentCollectionService<TDocumentEntity> where TDocumentEntity : IDocumentEntity
     {
         private string _uri;
         private string _authKey;
@@ -19,7 +20,7 @@ namespace MMAPI.Services
             _databaseName = databaseName;
         }
 
-        public async Task<string> CreateAsync(T entity)
+        public async Task<string> CreateAsync(TDocumentEntity entity)
         {
             using (var client = GetClient)
             {
@@ -33,11 +34,7 @@ namespace MMAPI.Services
         {
             get
             {
-                var typeName = typeof(T).Name.ToLower();
-
-                if (typeName.EndsWith("s")) return $"{typeName}es";
-
-                return $"{typeName}s";
+                return CollectionPropertyFactory.GetCollectionName<TDocumentEntity>();
             }
         }
 

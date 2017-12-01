@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPI.Services", "MMAPI.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPI.Services.Tests", "MMAPI.Services.Tests\MMAPI.Services.Tests.csproj", "{68D4F760-E141-48A6-A3DC-9A1E24FC5678}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMAPI.Common", "MMAPI.Common\MMAPI.Common.csproj", "{84617FD3-E61C-4C01-8F07-32B8C470301E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{68D4F760-E141-48A6-A3DC-9A1E24FC5678}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68D4F760-E141-48A6-A3DC-9A1E24FC5678}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68D4F760-E141-48A6-A3DC-9A1E24FC5678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84617FD3-E61C-4C01-8F07-32B8C470301E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84617FD3-E61C-4C01-8F07-32B8C470301E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84617FD3-E61C-4C01-8F07-32B8C470301E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84617FD3-E61C-4C01-8F07-32B8C470301E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
