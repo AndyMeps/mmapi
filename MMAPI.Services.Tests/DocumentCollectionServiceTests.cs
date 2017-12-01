@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MMAPI.Services.Attributes;
-using MMAPI.Services.Interfaces;
+using MMAPI.Interfaces.Data;
 using System;
 
 namespace MMAPI.Services.Tests

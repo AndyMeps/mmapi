@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using MMAPI.Interfaces.Data;
 using MMAPI.Services.Factories;
 using MMAPI.Services.Interfaces;
 using System;

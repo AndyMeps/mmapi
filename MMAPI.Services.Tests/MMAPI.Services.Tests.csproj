@@ -62,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj">
+      <Project>{e258caa8-9073-48bb-b7dd-28ff02790b76}</Project>
+      <Name>MMAPI.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MMAPI.Models\MMAPI.Models.csproj">
       <Project>{37c51b1c-0bae-4131-b636-54543a145c6c}</Project>
       <Name>MMAPI.Models</Name>

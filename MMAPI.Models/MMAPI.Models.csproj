@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MMAPI.Services\MMAPI.Services.csproj" />
+    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

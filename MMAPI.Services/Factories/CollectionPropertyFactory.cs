@@ -1,4 +1,5 @@
-﻿using MMAPI.Services.Attributes;
+﻿using MMAPI.Interfaces.Data;
+using MMAPI.Services.Attributes;
 using MMAPI.Services.Interfaces;
 using System;
 using System.Data.Entity.Design.PluralizationServices;

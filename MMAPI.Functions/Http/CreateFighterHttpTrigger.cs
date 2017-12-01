@@ -16,6 +16,10 @@ using System.Threading.Tasks;
 namespace MMAPI.Functions.Http
 {
     using Helpers;
+    using MMAPI.Repository;
+    using MMAPI.Repository.Data;
+    using Newtonsoft.Json.Serialization;
+
     public static class CreateFighterHttpTrigger
     {
         [FunctionName("CreateFighterHttpTrigger")]
@@ -27,73 +31,36 @@ namespace MMAPI.Functions.Http
 
             log.Info($"Received a new fighter: {JsonConvert.SerializeObject(fighter)}");
 
-            if (await HasExistingFighter(fighter))
+            var fighterRepo = GetFighterRepository();
+
+            var existingFighter = await fighterRepo.ExistsAsync<Fighter>(d =>
+                d.FirstName == fighter.FirstName &&
+                d.LastName == fighter.LastName &&
+                d.DateOfBirth == fighter.DateOfBirth);
+
+            if (existingFighter)
             {
                 return req.CreateResponse(HttpStatusCode.Conflict);
             }
+                
+            var id = await fighterRepo.CreateDocumentAsync(fighter);
 
-            var result = await CreateFighter(fighter);
-            return req.CreateResponse(new { Id = result });
+            return req.CreateResponse(new { id = id });
+            
         }
 
-        private static async Task<string> CreateFighter(Fighter fighter)
+        private static string Uri {  get { return Environment.GetEnvironmentVariable("DocumentDbUri");  } }
+        private static string AuthKey {  get { return Environment.GetEnvironmentVariable("DocumentDbAuthKey"); } }
+
+        private static DocumentRepository<Fighter> GetFighterRepository()
         {
-            var uri = Environment.GetEnvironmentVariable("DocumentDbUri");
-            var authKey = Environment.GetEnvironmentVariable("DocumentDbAuthKey");
-
-            using (var client = GetClient())
-            {
-                Database db = await client.CreateDatabaseIfNotExistsAsync(new Database { Id = "mmapidb" });
-                var collection = await client.CreateDocumentCollectionIfNotExistsAsync(db.SelfLink, new DocumentCollection { Id = "fighters" });
-                Document result = await client.CreateDocumentAsync(FightersCollection, fighter);               
-
-                return result.Id;
-            }
-        }
-
-        private static Uri FightersCollection
-        {
-            get
-            {
-                return UriFactory.CreateDocumentCollectionUri("mmapidb", "fighters");
-            }
-        }
-
-        /// <summary>
-        /// New up an instance of DocumentClient
-        /// </summary>
-        private static DocumentClient GetClient()
-        {
-            var uri = Environment.GetEnvironmentVariable("DocumentDbUri");
-            var authKey = Environment.GetEnvironmentVariable("DocumentDbAuthKey");
-
-            return new DocumentClient(
-                serviceEndpoint: new Uri(uri),
-                authKeyOrResourceToken: authKey,
-                connectionPolicy: new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct });
-        }
-
-        /// <summary>
-        /// Determine whether a fighter already exists.
-        /// </summary>
-        /// <param name="fighter">Potential new fighter.</param>
-        private static async Task<bool> HasExistingFighter(Fighter fighter)
-        {
-            using (var client = GetClient())
-            {
-                Expression<Func<Fighter, bool>> nameAndDobMatch = d =>
-                    d.FirstName == fighter.FirstName &&
-                    d.LastName == fighter.LastName &&
-                    d.DateOfBirth == fighter.DateOfBirth;
-
-                var result = await client
-                    .CreateDocumentQuery<Fighter>(FightersCollection)
-                    .Where(nameAndDobMatch)
-                    .AsDocumentQuery()
-                    .GetAllResultsAsync();
-
-                return result.Any();
-            }          
+            return new DocumentRepository<Fighter>(
+                new DocumentRepositoryConfiguration(Uri, AuthKey, "mmapidb", "fighters"),
+                new ConnectionPolicy { ConnectionMode = ConnectionMode.Gateway },
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                });
         }
     }
 }

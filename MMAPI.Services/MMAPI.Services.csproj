@@ -54,7 +54,6 @@
     <Compile Include="DocumentCollectionService.cs" />
     <Compile Include="Factories\CollectionPropertyFactory.cs" />
     <Compile Include="Interfaces\IDocumentCollectionService.cs" />
-    <Compile Include="Interfaces\IDocumentEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +63,10 @@
     <ProjectReference Include="..\MMAPI.Common\MMAPI.Common.csproj">
       <Project>{84617fd3-e61c-4c01-8f07-32b8c470301e}</Project>
       <Name>MMAPI.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj">
+      <Project>{e258caa8-9073-48bb-b7dd-28ff02790b76}</Project>
+      <Name>MMAPI.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
