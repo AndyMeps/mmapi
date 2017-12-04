@@ -1,15 +1,15 @@
 ﻿using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
 using MMAPI.Interfaces.Data;
 using MMAPI.Repository.Exceptions;
+using MMAPI.Repository.Extensions;
 using Newtonsoft.Json;
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Linq;
-using Microsoft.Azure.Documents.Linq;
-using MMAPI.Repository.Extensions;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MMAPI.Repository
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MMAPI.Services.Attributes;
+using MMAPI.Common.Attributes;
 using MMAPI.Interfaces.Data;
 using System;
 
@@ -30,7 +30,7 @@ namespace MMAPI.Services.Tests
         [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_DefaultForNameTestClass_ShouldMatch()
         {
-            var service = new DocumentCollectionService<NameTestClass>("uri", "authKey", "dbName");
+            var service = new DocumentCollectionService<NameTestClass>("https://documents.azure.com:443", "1234", "dbName");
 
             Assert.AreEqual("nametestclasses", service.CollectionName);
         }
@@ -39,7 +39,7 @@ namespace MMAPI.Services.Tests
         [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_DefaultForSimpleObject_ShouldMatch()
         {
-            var service = new DocumentCollectionService<SimpleObject>("uri", "authKey", "dbName");
+            var service = new DocumentCollectionService<SimpleObject>("https://documents.azure.com:443", "1234", "dbName");
 
             Assert.AreEqual("simpleobjects", service.CollectionName);
         }
@@ -48,7 +48,7 @@ namespace MMAPI.Services.Tests
         [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_CollectionNameAttribute_ShouldMatch()
         {
-            var service = new DocumentCollectionService<SimpleAttributeObject>("uri", "authKey", "dbName");
+            var service = new DocumentCollectionService<SimpleAttributeObject>("https://documents.azure.com:443", "1234", "dbName");
 
             Assert.AreEqual("test-collection-name", service.CollectionName);
         }

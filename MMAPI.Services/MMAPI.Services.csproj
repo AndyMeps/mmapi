@@ -50,9 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\CollectionNameAttribute.cs" />
+    <Compile Include="BaseService.cs" />
     <Compile Include="DocumentCollectionService.cs" />
     <Compile Include="Factories\CollectionPropertyFactory.cs" />
+    <Compile Include="FighterService.cs" />
     <Compile Include="Interfaces\IDocumentCollectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +68,14 @@
     <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj">
       <Project>{e258caa8-9073-48bb-b7dd-28ff02790b76}</Project>
       <Name>MMAPI.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMAPI.Models\MMAPI.Models.csproj">
+      <Project>{37C51B1C-0BAE-4131-B636-54543A145C6C}</Project>
+      <Name>MMAPI.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMAPI.Repository\MMAPI.Repository.csproj">
+      <Project>{26e366ca-bde2-4700-a71e-eb78718e35e4}</Project>
+      <Name>MMAPI.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

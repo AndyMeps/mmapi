@@ -1,6 +1,5 @@
-﻿using MMAPI.Interfaces.Data;
-using MMAPI.Services.Attributes;
-using MMAPI.Services.Interfaces;
+﻿using MMAPI.Common.Attributes;
+using MMAPI.Interfaces.Data;
 using System;
 using System.Data.Entity.Design.PluralizationServices;
 using System.Globalization;

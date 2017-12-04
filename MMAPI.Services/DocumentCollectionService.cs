@@ -1,34 +1,35 @@
-﻿using Microsoft.Azure.Documents;
-using Microsoft.Azure.Documents.Client;
-using MMAPI.Interfaces.Data;
+﻿using MMAPI.Interfaces.Data;
 using MMAPI.Services.Factories;
-using MMAPI.Services.Interfaces;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace MMAPI.Services
 {
-    public class DocumentCollectionService<TDocumentEntity> : IDocumentCollectionService<TDocumentEntity> where TDocumentEntity : IDocumentEntity
+    public class DocumentCollectionService<TDocumentEntity> : BaseService<TDocumentEntity>, IDocumentCollectionService<TDocumentEntity> where TDocumentEntity : IDocumentEntity
     {
-        private string _uri;
-        private string _authKey;
-        private string _databaseName;
-
-        public DocumentCollectionService(string uri, string authKey, string databaseName)
+        public DocumentCollectionService()
+            : base(Environment.GetEnvironmentVariable("DocumentDbEndpoint"),
+                   Environment.GetEnvironmentVariable("DocumentDbAuthKey"),
+                   Environment.GetEnvironmentVariable("DocumentDbName"))
         {
-            _authKey = authKey;
-            _uri = uri;
-            _databaseName = databaseName;
         }
+
+        public DocumentCollectionService(string uri, string authKey, string databaseName) : base(uri, authKey, databaseName) { }
 
         public async Task<string> CreateAsync(TDocumentEntity entity)
         {
-            using (var client = GetClient)
-            {
-                var uri = UriFactory.CreateDocumentCollectionUri(_databaseName, CollectionName);
-                Document result = await client.CreateDocumentAsync(uri, entity);
-                return result.Id;
-            }
+            return await repository.CreateDocumentAsync(entity);
+        }
+
+        public async Task<bool> ExistsAsync(Expression<Func<TDocumentEntity, bool>> expression)
+        {
+            return await repository.ExistsAsync(expression);
+        }
+
+        public async Task<TDocumentEntity> FindByIdAsync(Guid id)
+        {
+            return await repository.FindById<TDocumentEntity>(id);
         }
 
         public string CollectionName
@@ -36,17 +37,6 @@ namespace MMAPI.Services
             get
             {
                 return CollectionPropertyFactory.GetCollectionName<TDocumentEntity>();
-            }
-        }
-
-        private DocumentClient GetClient
-        {
-            get
-            {
-                return new DocumentClient(new Uri(_uri), _authKey, new ConnectionPolicy
-                {
-                    ConnectionMode = ConnectionMode.Direct
-                });
             }
         }
     }

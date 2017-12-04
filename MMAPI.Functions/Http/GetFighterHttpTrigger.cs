@@ -2,9 +2,8 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using MMAPI.Models;
-using MMAPI.Models.Enumerations;
+using MMAPI.Services;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,8 +16,6 @@ using System.Threading.Tasks;
 
 namespace MMAPI.Functions.Http
 {
-    using Helpers;
-
     public static class GetFighterHttpTrigger
     {
         [FunctionName("GetFighterHttpTrigger")]
@@ -27,31 +24,13 @@ namespace MMAPI.Functions.Http
             log.Info("C# HTTP trigger function processed a request.");
             log.Info($"Requesting fighter with Id: {id}");
 
-            return await Task.Run(() =>
-            {
-                return req.CreateResponse(HttpStatusCode.OK, new Fighter
-                {
-                    Id = new Guid(id),
-                    FirstName = "Connor",
-                    LastName = "McGreggor",
-                    Nickname = "The Notorious",
-                    Gender = Gender.Male,
-                    DateOfBirth = new DateTimeOffset(new DateTime(1988, 7, 14, 0, 0, 0, DateTimeKind.Utc)),
-                    Height = 69,
-                    Reach = 25,
-                    WeightClasses = new List<WeightSummary>
-                    {
-                        new WeightSummary { Id = Guid.NewGuid(), Name = "Featherweight" },
-                        new WeightSummary { Id = Guid.NewGuid(), Name = "Lightweight" },
-                        new WeightSummary { Id = Guid.NewGuid(), Name = "Welterweight" }
-                    },
-                    Record = new FighterRecord
-                    {
-                        Wins = 21,
-                        Losses = 3
-                    }
-                }, JsonHelper.StandardFormatter);
-            });
+            var fighterService = new DocumentCollectionService<Fighter>();
+
+            var result = await fighterService.FindByIdAsync(new Guid(id));
+
+            if (result == null) req.CreateErrorResponse(HttpStatusCode.NotFound, "Fighter not found.");
+
+            return req.CreateResponse(HttpStatusCode.OK, result);
         }
     }
 }
