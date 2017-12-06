@@ -19,22 +19,25 @@ namespace MMAPI.Services
         protected IRepository<D> repository;
 
         public DocumentService()
-            : this(Environment.GetEnvironmentVariable("DocumentDbEndpoint"),
-                   Environment.GetEnvironmentVariable("DocumentDbAuthKey"),
-                   Environment.GetEnvironmentVariable("DocumentDbName")) { }
-
-        public DocumentService(string uri, string authKey, string databaseName)
         {
             repository = new DocumentRepository<D>(
-                new DocumentRepositoryConfiguration(uri, authKey, "mmapidb", "fighters"),
+                new DocumentRepositoryConfiguration(
+                    Environment.GetEnvironmentVariable("DocumentDbEndpoint"),
+                    Environment.GetEnvironmentVariable("DocumentDbAuthKey"),
+                    Environment.GetEnvironmentVariable("DocumentDbName"),
+                    CollectionName),
                 new ConnectionPolicy { ConnectionMode = ConnectionMode.Gateway },
                 new JsonSerializerSettings
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                     DateFormatHandling = DateFormatHandling.IsoDateFormat
-                }
-                );
+                });
+        }
+
+        public DocumentService(IRepository<D> repo)
+        {
+            repository = repo;
         }
 
         public async Task<string> CreateAsync(D entity)

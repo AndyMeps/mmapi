@@ -2,6 +2,7 @@
 using MMAPI.Common.Attributes;
 using MMAPI.Repository.Interfaces;
 using System;
+using Moq;
 
 namespace MMAPI.Services.Tests
 {
@@ -30,7 +31,7 @@ namespace MMAPI.Services.Tests
         [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_DefaultForNameTestClass_ShouldMatch()
         {
-            var service = new DocumentService<NameTestClass>("https://documents.azure.com:443", "1234", "dbName");
+            var service = new DocumentService<NameTestClass>(new Mock<IRepository<NameTestClass>>().Object);
 
             Assert.AreEqual("nametestclasses", service.CollectionName);
         }
@@ -39,7 +40,7 @@ namespace MMAPI.Services.Tests
         [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_DefaultForSimpleObject_ShouldMatch()
         {
-            var service = new DocumentService<SimpleObject>("https://documents.azure.com:443", "1234", "dbName");
+            var service = new DocumentService<SimpleObject>(new Mock<IRepository<SimpleObject>>().Object);
 
             Assert.AreEqual("simpleobjects", service.CollectionName);
         }
@@ -48,7 +49,9 @@ namespace MMAPI.Services.Tests
         [TestCategory("Services > DocumentCollectionService > CollectionName")]
         public void CollectionName_CollectionNameAttribute_ShouldMatch()
         {
-            var service = new DocumentService<SimpleAttributeObject>("https://documents.azure.com:443", "1234", "dbName");
+            var fighterRepoMock = new Mock<IRepository<SimpleAttributeObject>>();
+
+            var service = new DocumentService<SimpleAttributeObject>(new Mock<IRepository<SimpleAttributeObject>>().Object);
 
             Assert.AreEqual("test-collection-name", service.CollectionName);
         }

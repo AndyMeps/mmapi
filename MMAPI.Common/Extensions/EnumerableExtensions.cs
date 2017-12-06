@@ -14,9 +14,8 @@ namespace System.Collections.Generic
             }
 
             // Enumerate the errors
-            var errors = input.ToList();
-            var success = !errors.Any();
-            var message = success ? "Validation successful." : string.Join(" ", errors);
+            var success = !input.Any();
+            var message = success ? "Validation successful." : string.Join(" ", input);
 
             return new ValidationResult(success, message);
         }

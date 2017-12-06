@@ -1,5 +1,6 @@
 ﻿using MMAPI.Common.Validator;
 using MMAPI.Models;
+using MMAPI.Repository.Interfaces;
 using MMAPI.Services.Interfaces;
 using System;
 using System.Linq.Expressions;
@@ -10,6 +11,8 @@ namespace MMAPI.Services
     public class FighterService : DocumentService<Fighter>, IFighterService
     {
         public FighterService() : base() { }
+
+        public FighterService(IRepository<Fighter> repo) : base(repo) { }
 
         public async Task<bool> ExistsAsync(Fighter fighter)
         {
