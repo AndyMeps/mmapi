@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MMAPI.Interfaces.Data
+namespace MMAPI.Repository.Interfaces
 {
     public interface IRepositoryConfiguration
     {
@@ -9,5 +9,6 @@ namespace MMAPI.Interfaces.Data
         string Database { get; set; }
         string Collection { get; set; }
         Uri GetDocumentCollectionUri();
+        Uri GetDocumentUri(string id);
     }
 }

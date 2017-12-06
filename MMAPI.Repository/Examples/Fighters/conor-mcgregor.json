@@ -1,0 +1,29 @@
+﻿{
+  "firstName": "Conor",
+  "lastName": "McGregor",
+  "nickname": "The Notorious",
+  "gender": "Male",
+  "height": 69,
+  "reach": 74,
+  "dateOfBirth": "1988-07-14T00:00:00.000Z",
+  "weightClasses": [
+    {
+      "id": "f6e010ab-ee4b-4bd7-aa1e-d00f0acfd989",
+      "name": "Featherweight"
+    },
+    {
+      "id": "5f4b1ab8-3da9-42d1-8871-866a038b35b2",
+      "name": "Lightweight"
+    },
+    {
+      "id": "1e425629-811d-47b8-acd1-ccc342cdb9de",
+      "name": "Welterweight"
+    }
+  ],
+  "record": {
+    "wins": 21,
+    "losses": 3,
+    "draws": 0,
+    "noContests": 0
+  }
+}

@@ -27,7 +27,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj" />
     <ProjectReference Include="..\MMAPI.Models\MMAPI.Models.csproj" />
     <ProjectReference Include="..\MMAPI.Services\MMAPI.Services.csproj" />
   </ItemGroup>

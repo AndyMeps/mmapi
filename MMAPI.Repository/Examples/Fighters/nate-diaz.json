@@ -1,0 +1,29 @@
+﻿{
+  "firstName": "Nathan",
+  "lastName": "Diaz",
+  "nickname": "Nate",
+  "gender": "Male",
+  "height": 72,
+  "reach": 76,
+  "dateOfBirth": "1985-04-16T00:00:00.000Z",
+  "weightClasses": [
+    {
+      "id": "5f4b1ab8-3da9-42d1-8871-866a038b35b2",
+      "name": "Lightweight"
+    },
+    {
+      "id": "1e425629-811d-47b8-acd1-ccc342cdb9de",
+      "name": "Welterweight"
+    },
+    {
+      "id": "b99a8a14-9d90-4c51-b111-c4924c1626d3",
+      "name": "Middleweight"
+    },
+  ],
+  "record": {
+    "wins": 19,
+    "losses": 11,
+    "draws": 0,
+    "noContests": 0
+  }
+}

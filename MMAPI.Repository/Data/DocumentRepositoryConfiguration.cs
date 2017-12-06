@@ -1,5 +1,5 @@
 ﻿using Microsoft.Azure.Documents.Client;
-using MMAPI.Interfaces.Data;
+using MMAPI.Repository.Interfaces;
 using System;
 
 namespace MMAPI.Repository.Data
@@ -27,6 +27,11 @@ namespace MMAPI.Repository.Data
         public Uri GetDocumentCollectionUri()
         {
             return UriFactory.CreateDocumentCollectionUri(Database, Collection);
+        }
+
+        public Uri GetDocumentUri(string id)
+        {
+            return UriFactory.CreateDocumentUri(Database, Collection, id);
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿{
+  "firstName": "TJ",
+  "lastName": "Dillashaw",
+  "nickname": "Killashaw",
+  "gender": "Male",
+  "height": 66,
+  "reach": 67,
+  "dateOfBirth": "1986-02-07T00:00:00.000Z",
+  "weightClasses": [
+    {
+      "id": "61612de1-4dd3-4ad7-b647-58ce92b4d0f3",
+      "name": "Bantamweight"
+    }
+  ],
+  "record": {
+    "wins": 15,
+    "losses": 3,
+    "draws": 0,
+    "noContests": 0
+  }
+}

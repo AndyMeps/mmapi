@@ -1,18 +1,17 @@
-﻿using MMAPI.Models;
+﻿using MMAPI.Common.Validator;
+using MMAPI.Models;
+using MMAPI.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MMAPI.Services
 {
-    public class FighterService : DocumentCollectionService<Fighter>
+    public class FighterService : DocumentService<Fighter>, IFighterService
     {
         public FighterService() : base() { }
 
-        public async Task<bool> Exists(Fighter fighter)
+        public async Task<bool> ExistsAsync(Fighter fighter)
         {
             Expression<Func<Fighter, bool>> existingFighter = d =>
                 d.FirstName == fighter.FirstName &&
@@ -20,6 +19,13 @@ namespace MMAPI.Services
                 d.DateOfBirth == fighter.DateOfBirth;
 
             return await ExistsAsync(existingFighter);
+        }
+
+        public async Task<Guid> ValidateAndCreateAsync(Fighter fighter)
+        {
+            if (fighter.IsValid()) return new Guid(await CreateAsync(fighter));
+
+            throw new Exception(fighter.ValidationMessage());            
         }
     }
 }

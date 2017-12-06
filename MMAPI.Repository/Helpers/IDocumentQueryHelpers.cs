@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MMAPI.Repository.Extensions
+namespace MMAPI.Repository.Helpers
 {
     public static class IDocumentQueryHelpers
     {

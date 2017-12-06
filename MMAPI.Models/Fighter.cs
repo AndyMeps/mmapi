@@ -1,4 +1,5 @@
-﻿using MMAPI.Models.Enumerations;
+﻿using MMAPI.Common.Validator;
+using MMAPI.Models.Enumerations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -9,7 +10,7 @@ namespace MMAPI.Models
     /// <summary>
     /// A fighter entry including general statistics relating to the fighter.
     /// </summary>
-    public class Fighter : BaseEntity
+    public class Fighter : BaseEntity, IValidatable
     {
         /// <summary>
         /// First name of the fighter.
@@ -64,6 +65,37 @@ namespace MMAPI.Models
         /// Professional record of the fighter.
         /// </summary>
         [JsonProperty("record")]
-        public FighterRecord Record { get; set; }        
+        public FighterRecord Record { get; set; }
+
+        public ValidationResult Validate()
+        {
+            List<string> messages = new List<string>();
+            if (string.IsNullOrWhiteSpace(FirstName))
+            {
+                messages.Add("FirstName cannot be null, empty or whitespace.");
+            }
+
+            if (string.IsNullOrWhiteSpace(LastName))
+            {
+                messages.Add("LastName cannot be null, empty or whitespace.");
+            }
+
+            if (DateOfBirth == null)
+            {
+                messages.Add("DateOfBrith cannot be null.");
+            }
+
+            if (Height == 0)
+            {
+                messages.Add("Height must be greater than 0.");
+            }
+
+            if (Reach == 0)
+            {
+                messages.Add("Reach must be greater than 0.");
+            }
+
+            return messages.ToValidationResult();
+        }
     }
 }

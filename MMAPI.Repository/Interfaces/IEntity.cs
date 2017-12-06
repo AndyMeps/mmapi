@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace MMAPI.Interfaces.Data
+namespace MMAPI.Repository.Interfaces
 {
-    public interface IDocumentEntity
+    public interface IEntity
     {
         [JsonProperty("id")]
         Guid? Id { get; set; }

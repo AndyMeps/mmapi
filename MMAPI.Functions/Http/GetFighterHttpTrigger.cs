@@ -24,7 +24,7 @@ namespace MMAPI.Functions.Http
             log.Info("C# HTTP trigger function processed a request.");
             log.Info($"Requesting fighter with Id: {id}");
 
-            var fighterService = new DocumentCollectionService<Fighter>();
+            var fighterService = new FighterService();
 
             var result = await fighterService.FindByIdAsync(new Guid(id));
 

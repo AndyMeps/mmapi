@@ -1,5 +1,5 @@
 ﻿using MMAPI.Common.Attributes;
-using MMAPI.Interfaces.Data;
+using MMAPI.Repository.Interfaces;
 using System;
 using System.Data.Entity.Design.PluralizationServices;
 using System.Globalization;
@@ -8,7 +8,7 @@ namespace MMAPI.Services.Factories
 {
     public static class CollectionPropertyFactory
     {
-        public static string GetCollectionName<T>(CultureInfo culture = null) where T : IDocumentEntity
+        public static string GetCollectionName<T>(CultureInfo culture = null) where T : IEntity
         {
             // First try to get the name from the CollectionName attribute.
             var collectionNameAttr = typeof(T).FirstAttribute<CollectionNameAttribute>();

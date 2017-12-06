@@ -51,17 +51,18 @@
   <ItemGroup>
     <Compile Include="Data\DocumentRepositoryConfiguration.cs" />
     <Compile Include="DocumentRepository.cs" />
-    <Compile Include="Exceptions\NullDocumentResultException.cs" />
-    <Compile Include="IDocumentQueryHelpers.cs" />
+    <Compile Include="Exceptions\RepositoryException.cs" />
+    <Compile Include="Exceptions\RepositoryExceptionType.cs" />
+    <Compile Include="Helpers\IDocumentQueryHelpers.cs" />
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IRepositoryConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj">
-      <Project>{e258caa8-9073-48bb-b7dd-28ff02790b76}</Project>
-      <Name>MMAPI.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Examples\Fighters\conor-mcgregor.json" />
+    <None Include="Examples\Fighters\nate-diaz.json" />
+    <None Include="Examples\Fighters\tj-dillashaw.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -70,13 +70,13 @@
       <Project>{84617fd3-e61c-4c01-8f07-32b8c470301e}</Project>
       <Name>MMAPI.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj">
-      <Project>{e258caa8-9073-48bb-b7dd-28ff02790b76}</Project>
-      <Name>MMAPI.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MMAPI.Models\MMAPI.Models.csproj">
       <Project>{37c51b1c-0bae-4131-b636-54543a145c6c}</Project>
       <Name>MMAPI.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMAPI.Repository\MMAPI.Repository.csproj">
+      <Project>{26e366ca-bde2-4700-a71e-eb78718e35e4}</Project>
+      <Name>MMAPI.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\MMAPI.Services\MMAPI.Services.csproj">
       <Project>{abfc98f8-d94c-4899-888c-36fceb6662ed}</Project>

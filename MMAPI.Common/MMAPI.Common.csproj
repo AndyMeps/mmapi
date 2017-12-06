@@ -41,14 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\CollectionNameAttribute.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\ValidatableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MMAPI.Interfaces\MMAPI.Interfaces.csproj">
-      <Project>{e258caa8-9073-48bb-b7dd-28ff02790b76}</Project>
-      <Name>MMAPI.Interfaces</Name>
-    </ProjectReference>
+    <Compile Include="Validator\IValidatable.cs" />
+    <Compile Include="Validator\ValidationResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

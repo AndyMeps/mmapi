@@ -3,6 +3,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using MMAPI.Models;
 using MMAPI.Services;
+using MMAPI.Services.Interfaces;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
@@ -19,19 +20,20 @@ namespace MMAPI.Functions.Http
         {
             var fighter = await req.Content.ReadAsAsync<Fighter>();
 
-            log.Info($"Received a new fighter: {JsonConvert.SerializeObject(fighter)}");
+            IFighterService fighterService = new FighterService();
 
-            var fighterService = new FighterService();
-
-            if (await fighterService.Exists(fighter))
+            if (await fighterService.ExistsAsync(fighter))
             {
+                log.Info($"Ignored fighter that already exists: `{fighter.FirstName} {fighter.LastName} | {fighter.DateOfBirth}`");
+
                 return req.CreateResponse(HttpStatusCode.Conflict);
             }
 
             var id = await fighterService.CreateAsync(fighter);
 
-            return req.CreateResponse(new { id = id });
-            
+            log.Info($"Created a new fighter with Id: `{id}`");
+
+            return req.CreateResponse(new { id = id });            
         }
     }
 }
