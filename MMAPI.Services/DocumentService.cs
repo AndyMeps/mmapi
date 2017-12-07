@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 
 namespace MMAPI.Services
 {
+    using Exceptions;
+
     public class DocumentService<D> : IService<D> where D : IEntity
     {
         protected IRepository<D> repository;
@@ -42,13 +44,15 @@ namespace MMAPI.Services
 
         public async Task<string> CreateAsync(D entity)
         {
+            if (entity == null) throw new ArgumentNullException("entity");
+
             try
             {
                 return await repository.CreateAsync(entity);
             }
             catch (RepositoryException ex)
             {
-                return null;
+                throw new CreateFailedException(CollectionName, ex);
             }            
         }
 
@@ -65,6 +69,8 @@ namespace MMAPI.Services
 
         public async Task DeleteAsync(string id)
         {
+            if (!Guid.TryParse(id, out Guid guidId)) throw new InvalidResourceIdException(id);
+
             await repository.DeleteAsync(id);
         }
 
@@ -72,8 +78,14 @@ namespace MMAPI.Services
         {
             get
             {
-                return CollectionPropertyFactory.GetCollectionName<D>();
+                if (_collectionName == null)
+                {
+                    _collectionName = CollectionPropertyFactory.GetCollectionName<D>();
+                }
+                return _collectionName;
             }
         }
+
+        private string _collectionName;
     }
 }

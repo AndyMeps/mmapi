@@ -1,6 +1,8 @@
-﻿using MMAPI.Common.Validator;
+﻿using MMAPI.Common.Exceptions;
+using MMAPI.Common.Validator;
 using MMAPI.Models;
 using MMAPI.Repository.Interfaces;
+using MMAPI.Services.Exceptions;
 using MMAPI.Services.Interfaces;
 using System;
 using System.Linq.Expressions;
@@ -16,6 +18,8 @@ namespace MMAPI.Services
 
         public async Task<bool> ExistsAsync(Fighter fighter)
         {
+            if (fighter == null) throw new ArgumentNullException("fighter");
+
             Expression<Func<Fighter, bool>> existingFighter = d =>
                 d.FirstName == fighter.FirstName &&
                 d.LastName == fighter.LastName &&
@@ -26,9 +30,10 @@ namespace MMAPI.Services
 
         public async Task<Guid> ValidateAndCreateAsync(Fighter fighter)
         {
-            if (fighter.IsValid()) return new Guid(await CreateAsync(fighter));
+            var validation = fighter.ValidationResult();
+            if (validation.Success) return new Guid(await CreateAsync(fighter));
 
-            throw new Exception(fighter.ValidationMessage());            
+            throw new ValidationFailedException(validation.Message);            
         }
     }
 }

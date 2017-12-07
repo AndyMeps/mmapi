@@ -58,7 +58,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentCollectionServiceTests.cs" />
+    <Compile Include="DocumentServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FighterServiceTests.cs" />
   </ItemGroup>

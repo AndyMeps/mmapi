@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentService.cs" />
+    <Compile Include="Exceptions\CreateFailedException.cs" />
+    <Compile Include="Exceptions\InvalidResourceIdException.cs" />
     <Compile Include="Factories\CollectionPropertyFactory.cs" />
     <Compile Include="FighterService.cs" />
     <Compile Include="Interfaces\IService.cs" />

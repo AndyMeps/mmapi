@@ -10,6 +10,6 @@ namespace MMAPI.Repository.Exceptions
             : this(exceptionType, null) { }
 
         public RepositoryException(RepositoryExceptionType exceptionType, Exception innerException)
-            : base(innerException.Message, innerException) { }
+            : base(innerException?.Message ?? Enum.GetName(typeof(RepositoryExceptionType), exceptionType), innerException) { }
     }
 }
