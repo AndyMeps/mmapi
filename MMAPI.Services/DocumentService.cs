@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace MMAPI.Services
 {
     using Exceptions;
+    using Microsoft.Azure.Documents;
 
     public class DocumentService<D> : IService<D> where D : IEntity
     {
@@ -58,7 +59,11 @@ namespace MMAPI.Services
 
         public async Task<bool> ExistsAsync(Expression<Func<D, bool>> expression)
         {
+            if (expression == null) throw new ArgumentNullException("expression");
+
             var result = await repository.FindAsync(expression);
+            if (result == null) return false;
+
             return result.Any();
         }
 

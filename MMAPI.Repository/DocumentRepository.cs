@@ -33,14 +33,6 @@ namespace MMAPI.Repository
         }
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="D"></typeparam>
-        /// <param name="entity"></param>
-        /// <exception cref="ArgumentNullException" />
-        /// <exception cref="RepositoryException" />
-        /// <returns></returns>
         public async Task<string> CreateAsync(D entity)
         {
             if (entity == null) throw new ArgumentNullException("entity");
@@ -50,20 +42,21 @@ namespace MMAPI.Repository
 
             using (var client = GetClient())
             {
-                Document result = await client.CreateDocumentAsync(_config.GetDocumentCollectionUri(), entity);
+                try
+                {
+                    Document result = await client.CreateDocumentAsync(_config.GetDocumentCollectionUri(), entity);
 
-                if (result == null) throw new RepositoryException(RepositoryExceptionType.NullResult);
+                    if (result == null) throw new RepositoryException(RepositoryExceptionType.NullResult);
 
-                return result.Id;
+                    return result.Id;
+                }
+                catch (DocumentClientException ex)
+                {
+                    throw new RepositoryException(RepositoryExceptionType.ServerError, ex);
+                }                
             }
         }
 
-        /// <summary>
-        /// Delete a single entity by id.
-        /// </summary>
-        /// <param name="id">Id of the entity to delete.</param>
-        /// <exception cref="ArgumentNullException" />
-        /// <exception cref="RepositoryException" />
         public async Task DeleteAsync(string id)
         {
             using (var client = GetClient())
@@ -77,9 +70,8 @@ namespace MMAPI.Repository
                     // If the exception is that the resource doesn't exist, that's fine as we want to delete it anyway.
                     if (ex.StatusCode != null && ex.StatusCode == HttpStatusCode.NotFound) return;
 
+                    // Otherwise throw the exception.
                     throw new RepositoryException(RepositoryExceptionType.ServerError, ex);
-                    // Otherwise, throw the exception.
-                    throw;
                 }
             }
         }
@@ -88,9 +80,16 @@ namespace MMAPI.Repository
         {
             using (var client = GetClient())
             {
-                var query = client.CreateDocumentQuery<D>(_config.GetDocumentCollectionUri()).Where(condition);
+                try
+                {
+                    var query = client.CreateDocumentQuery<D>(_config.GetDocumentCollectionUri()).Where(condition);
 
-                return await query.AsDocumentQuery().GetAllResultsAsync();
+                    return await query.AsDocumentQuery().GetAllResultsAsync();
+                }
+                catch (DocumentClientException ex)
+                {
+                    throw new RepositoryException(RepositoryExceptionType.ServerError, ex);
+                }                
             }
         }
 
@@ -98,9 +97,16 @@ namespace MMAPI.Repository
         {
             using (var client = GetClient())
             {
-                var query = client.CreateDocumentQuery<D>(_config.GetDocumentCollectionUri()).Where(c => c.Id == id).Take(1);
+                try
+                {
+                    var query = client.CreateDocumentQuery<D>(_config.GetDocumentCollectionUri()).Where(c => c.Id == id).Take(1);
 
-                return await query.AsDocumentQuery().FirstOrDefault();
+                    return await query.AsDocumentQuery().FirstOrDefault();
+                }
+                catch (DocumentClientException ex)
+                {
+                    throw new RepositoryException(RepositoryExceptionType.ServerError, ex);
+                }
             }
         }
 
@@ -108,10 +114,17 @@ namespace MMAPI.Repository
         {
             using (var client = GetClient())
             {
-                var skipAmount = page - 1 * pageSize;
-                var query = client.CreateDocumentQuery<D>(_config.GetDocumentCollectionUri()).Skip(skipAmount).Take(pageSize);
+                try
+                {
+                    var skipAmount = page - 1 * pageSize;
+                    var query = client.CreateDocumentQuery<D>(_config.GetDocumentCollectionUri()).Skip(skipAmount).Take(pageSize);
 
-                return await query.AsDocumentQuery().GetAllResultsAsync();
+                    return await query.AsDocumentQuery().GetAllResultsAsync();
+                }
+                catch (DocumentClientException ex)
+                {
+                    throw new RepositoryException(RepositoryExceptionType.ServerError, ex);
+                }                
             }
         }
 
@@ -121,6 +134,11 @@ namespace MMAPI.Repository
         }
 
         #region Private Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException" />
         private DocumentClient GetClient()
         {
             if (_config == null) throw new InvalidOperationException("Null configuration provided.");
